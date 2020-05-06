@@ -18,10 +18,9 @@ class SortingTripAPITest(TestCase):
     def test_sorting_trip_request(self):
         # We are preparing data with aur boarding cards
         data_to_send = [
-            {'transportation': 'train', 'origin': 'Madrid', 'destination': 'Barcelona',
+            {'transportation': 'train', 'origin': 'Madrid', 'destination': 'Barcelona', 'number': '78A',
              'seat': '45B'},
-            {'transportation': 'airport bus', 'origin': 'Barcelona', 'destination': 'Girona Airport',
-             'seat': None},
+            {'transportation': 'airport bus', 'origin': 'Barcelona', 'destination': 'Girona Airport'},
             {'transportation': 'airplane', 'origin': 'Girona Airport', 'destination': 'Stockholm',
              'flight': 'SK455', 'seat': '3A', 'gate': '45B', 'ticket_counter': '344'},
             {'transportation': 'airplane', 'origin': 'Stockholm', 'destination': 'New York JFK',
