@@ -1,5 +1,5 @@
 from unittest import TestCase
-from app import create_app
+from trip_sorter.app import create_app
 import json
 from random import shuffle
 
@@ -33,7 +33,7 @@ class SortingTripAPITest(TestCase):
 
         # We want them in order, and in human language
         response = self.client.post(
-            url_for('api.trip_sorter'),
+            '/trip_sorter',
             data=json.dumps(data_to_send)
         )
 
