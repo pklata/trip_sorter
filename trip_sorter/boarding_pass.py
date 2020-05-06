@@ -15,10 +15,43 @@ class BoardingPassBase:
         self.destination = kwargs.get('destination')
 
 
+class AirplaneBoardingPass(BoardingPassBase):
+
+    def __init__(self, transportation, **kwargs):
+        super().__init__(transportation, **kwargs)
+        self.flight = kwargs.get('flight')
+        self.seat = kwargs.get('seat')
+        self.gate = kwargs.get('gate')
+        self.ticket_counter = kwargs.get('ticket_counter')
+        self.automatic_baggage_transfer = kwargs.get('automatic_baggage_transfer')
+
+
+class TrainBoardingPass(BoardingPassBase):
+
+    def __init__(self, transportation, **kwargs):
+        super().__init__(transportation, **kwargs)
+        self.seat = kwargs.get('seat')
+
+
+class AirportBusBoardingPass(BoardingPassBase):
+
+    def __init__(self, transportation, **kwargs):
+        super().__init__(transportation, **kwargs)
+        self.seat = kwargs.get('seat')
+        
+        
+BOARDING_CARD_CLASS_MAP = {
+    'train': TrainBoardingPass,
+    'airport bus': AirportBusBoardingPass,
+    'airplane': AirplaneBoardingPass
+}
+
+
 def boarding_pass_factory(raw_data):
     try:
         transportation = raw_data.pop('transportation')
     except KeyError:
         raise InvalidDataError(NO_TRANSPORTATION_ERROR_MESSAGE)
 
-    return BoardingPassBase(transportation, **raw_data)
+    class_ = BOARDING_CARD_CLASS_MAP.get(transportation, BoardingPassBase)
+    return class_(transportation, **raw_data)
