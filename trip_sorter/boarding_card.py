@@ -1,8 +1,6 @@
+from trip_sorter.errors import InvalidDataError
+
 NO_TRANSPORTATION_ERROR_MESSAGE = 'Boarding Card has no mean of transportation.'
-
-
-class InvalidDataError(Exception):
-    pass
 
 
 class BoardingCardBase:
