@@ -45,4 +45,4 @@ class SortingTripAPITest(TestCase):
                           "5. You have arrived at your final destination."
 
         self.assertTrue(response.status_code, 200)
-        self.assertEqual(response.data, expected_result)
+        self.assertEqual(response.data.decode(), expected_result)
