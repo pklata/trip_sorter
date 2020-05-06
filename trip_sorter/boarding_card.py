@@ -1,13 +1,13 @@
-NO_TRANSPORTATION_ERROR_MESSAGE = 'Boarding Pass has no mean of transportation.'
+NO_TRANSPORTATION_ERROR_MESSAGE = 'Boarding Card has no mean of transportation.'
 
 
 class InvalidDataError(Exception):
     pass
 
 
-class BoardingPassBase:
+class BoardingCardBase:
 
-    """ This is a base class for boarding passes of different transportations"""
+    """ This is a base class for boarding cardes of different transportations"""
 
     def __init__(self, transportation, **kwargs):
         self.transportation = transportation
@@ -15,7 +15,7 @@ class BoardingPassBase:
         self.destination = kwargs.get('destination')
 
 
-class AirplaneBoardingPass(BoardingPassBase):
+class AirplaneBoardingCard(BoardingCardBase):
 
     def __init__(self, transportation, **kwargs):
         super().__init__(transportation, **kwargs)
@@ -26,14 +26,14 @@ class AirplaneBoardingPass(BoardingPassBase):
         self.automatic_baggage_transfer = kwargs.get('automatic_baggage_transfer')
 
 
-class TrainBoardingPass(BoardingPassBase):
+class TrainBoardingCard(BoardingCardBase):
 
     def __init__(self, transportation, **kwargs):
         super().__init__(transportation, **kwargs)
         self.seat = kwargs.get('seat')
 
 
-class AirportBusBoardingPass(BoardingPassBase):
+class AirportBusBoardingCard(BoardingCardBase):
 
     def __init__(self, transportation, **kwargs):
         super().__init__(transportation, **kwargs)
@@ -41,17 +41,17 @@ class AirportBusBoardingPass(BoardingPassBase):
         
         
 BOARDING_CARD_CLASS_MAP = {
-    'train': TrainBoardingPass,
-    'airport bus': AirportBusBoardingPass,
-    'airplane': AirplaneBoardingPass
+    'train': TrainBoardingCard,
+    'airport bus': AirportBusBoardingCard,
+    'airplane': AirplaneBoardingCard
 }
 
 
-def boarding_pass_factory(raw_data):
+def boarding_card_factory(raw_data):
     try:
         transportation = raw_data.pop('transportation')
     except KeyError:
         raise InvalidDataError(NO_TRANSPORTATION_ERROR_MESSAGE)
 
-    class_ = BOARDING_CARD_CLASS_MAP.get(transportation, BoardingPassBase)
+    class_ = BOARDING_CARD_CLASS_MAP.get(transportation, BoardingCardBase)
     return class_(transportation, **raw_data)
