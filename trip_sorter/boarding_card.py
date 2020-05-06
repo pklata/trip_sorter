@@ -14,7 +14,8 @@ class BoardingCardBase:
         self.origin = kwargs.get('origin')
         self.destination = kwargs.get('destination')
 
-    def verbose(self):
+    @property
+    def description(self):
         raise InvalidDataError("This is a base class, does nothing.")
 
 
@@ -28,7 +29,8 @@ class AirplaneBoardingCard(BoardingCardBase):
         self.ticket_counter = kwargs.get('ticket_counter')
         self.automatic_baggage_transfer = kwargs.get('automatic_baggage_transfer')
 
-    def verbose(self):
+    @property
+    def description(self):
         description = f'From {self.origin}, take flight {self.flight} to {self.destination}.'
         description = f'{description} Gate {self.gate}, seat {self.seat}.'
         if self.automatic_baggage_transfer:
@@ -43,7 +45,8 @@ class TrainBoardingCard(BoardingCardBase):
         self.number = kwargs.get('number')
         self.seat = kwargs.get('seat')
 
-    def verbose(self):
+    @property
+    def description(self):
         return f'Take train {self.number} from {self.origin} to {self.destination}. Sit in seat {self.seat}.'
 
 
@@ -52,7 +55,8 @@ class AirportBusBoardingCard(BoardingCardBase):
     def __init__(self, transportation, **kwargs):
         super().__init__(transportation, **kwargs)
 
-    def verbose(self):
+    @property
+    def description(self):
         return f'Take the airport bus from {self.origin} to {self.destination}. No seat assignment.'
 
 

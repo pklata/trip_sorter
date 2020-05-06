@@ -57,7 +57,7 @@ class AirplaneBoardingCardTest(TestCase):
         self.assertEqual(boarding_card.ticket_counter, ticket_counter)
         self.assertEqual(boarding_card.automatic_baggage_transfer, automatic_baggage_transfer)
 
-    def test_airport_bus_boarding_card_is_verbose(self):
+    def test_airport_bus_boarding_card_description(self):
         data1 = {
             'transportation': 'airplane',
             'origin': 'Girona Airport',
@@ -71,7 +71,7 @@ class AirplaneBoardingCardTest(TestCase):
         expected_text1 = 'From Girona Airport, take flight SK455 to Stockholm. ' \
                          'Gate 45B, seat 3A. Baggage drop at ticket counter 344.'
 
-        self.assertEqual(boarding_card1.verbose(), expected_text1)
+        self.assertEqual(boarding_card1.description, expected_text1)
 
         data2 = {
             'transportation': 'airplane',
@@ -86,7 +86,7 @@ class AirplaneBoardingCardTest(TestCase):
         expected_text2 = 'From Stockholm, take flight SK22 to New York JFK. Gate 22, seat 7B. ' \
                          'Baggage will we automatically transferred from your last leg.'
 
-        self.assertEqual(boarding_card2.verbose(), expected_text2)
+        self.assertEqual(boarding_card2.description, expected_text2)
 
 
 class AirportBusBoardingCardTest(TestCase):
@@ -108,7 +108,7 @@ class AirportBusBoardingCardTest(TestCase):
         self.assertEqual(boarding_card.origin, origin)
         self.assertEqual(boarding_card.destination, destination)
 
-    def test_airport_bus_boarding_card_is_verbose(self):
+    def test_airport_bus_boarding_card_description(self):
         data = {
             'transportation': 'airport bus',
             'origin': 'Barcelona',
@@ -117,7 +117,7 @@ class AirportBusBoardingCardTest(TestCase):
         }
         boarding_card = boarding_card_factory(data)
         expected_text = 'Take the airport bus from Barcelona to Girona Airport. No seat assignment.'
-        self.assertEqual(boarding_card.verbose(), expected_text)
+        self.assertEqual(boarding_card.description, expected_text)
 
 
 class TrainBoardingCardTest(TestCase):
@@ -145,7 +145,7 @@ class TrainBoardingCardTest(TestCase):
         self.assertEqual(boarding_card.seat, seat)
         self.assertEqual(boarding_card.number, number)
 
-    def test_train_boarding_card_is_verbose(self):
+    def test_train_boarding_card_description(self):
         data = {
             'transportation': 'train',
             'origin': 'Madrid',
@@ -155,4 +155,4 @@ class TrainBoardingCardTest(TestCase):
         }
         boarding_card = boarding_card_factory(data)
         expected_text = 'Take train 78A from Madrid to Barcelona. Sit in seat 45B.'
-        self.assertEqual(boarding_card.verbose(), expected_text)
+        self.assertEqual(boarding_card.description, expected_text)
