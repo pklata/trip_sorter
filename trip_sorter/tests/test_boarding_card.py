@@ -77,7 +77,7 @@ class AirplaneBoardingCardTest(TestCase):
             'transportation': 'airplane',
             'origin': 'Stockholm',
             'destination': 'New York JFK',
-             'flight': 'SK22',
+            'flight': 'SK22',
             'seat': '7B',
             'gate': '22',
             'automatic_baggage_transfer': True
