@@ -5,7 +5,8 @@ NO_TRANSPORTATION_ERROR_MESSAGE = 'Boarding Card has no mean of transportation.'
 
 class BoardingCardBase:
 
-    """ This is a base class for boarding cardes of different transportations"""
+    """ This is a base class for boarding cardes of different transportations
+    Means of transportation can be added by implementing this interface"""
 
     def __init__(self, transportation, **kwargs):
         self.transportation = transportation
