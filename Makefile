@@ -1,13 +1,14 @@
+# Makefile
+
 build:
 	virtualenv -p python3.8 virtualenv
 	./virtualenv/bin/pip install -r requirements.txt
+	echo "export PYTHONPATH=$PYTHONPATH:$(pwd)" >> ./virtualenv/bin/activate
 
 run:
-	source ./virtualenv/bin/activate
-	export PYTHONPATH=$PYTHONPATH:$(pwd)
-	python trip_sorter/app.py
+	./virtualenv/bin/python trip_sorter/app.py
 
-test
+test:
 	./virtualenv/bin/python -m unittest discover -v
 
 sample_request:
