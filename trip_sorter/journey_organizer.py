@@ -5,7 +5,8 @@ class JourneyOrganizer:
     """Collection of Boarding Cards"""
 
     def __init__(self):
-        # there will be a little memory overhead but we won't have to iterate over dict
+        # there will be a little memory overhead but
+        # we won't have to iterate over dict
         self._items_by_origin = dict()
         self._items_by_destination = dict()
 
@@ -18,12 +19,16 @@ class JourneyOrganizer:
         self._items_by_destination[item.destination] = item
 
     def sorted(self):
-        starting_points = list(self._items_by_origin.keys() - self._items_by_destination.keys())
+        starting_points = list(self._items_by_origin.keys()
+                               - self._items_by_destination.keys())
+
         if len(starting_points) != 1:
             raise InvalidDataError('Origin can not be found')
         origin = starting_points[0]
 
-        final_destinations = list(self._items_by_destination.keys() - self._items_by_origin.keys())
+        final_destinations = list(self._items_by_destination.keys()
+                                  - self._items_by_origin.keys())
+
         if len(final_destinations) != 1:
             raise InvalidDataError('Destination can not be found')
         destination = final_destinations[0]
@@ -44,5 +49,6 @@ class JourneyOrganizer:
         for item in ordered_items:
             journey_plan = f'{journey_plan}{stage}. {item.description}\n'
             stage += 1
-        journey_plan = f'{journey_plan}{stage}. You have arrived at your final destination.'
+        journey_plan = f'{journey_plan}{stage}. ' \
+                       f'You have arrived at your final destination.'
         return journey_plan

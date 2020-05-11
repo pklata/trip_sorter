@@ -55,7 +55,8 @@ class AirplaneBoardingCardTest(TestCase):
         self.assertEqual(boarding_card.seat, seat)
         self.assertEqual(boarding_card.gate, gate)
         self.assertEqual(boarding_card.ticket_counter, ticket_counter)
-        self.assertEqual(boarding_card.automatic_baggage_transfer, automatic_baggage_transfer)
+        self.assertEqual(boarding_card.automatic_baggage_transfer,
+                         automatic_baggage_transfer)
 
     def test_airport_bus_boarding_card_description(self):
         data1 = {
@@ -68,8 +69,10 @@ class AirplaneBoardingCardTest(TestCase):
             'ticket_counter': '344'
         }
         boarding_card1 = boarding_card_factory(data1)
-        expected_text1 = 'From Girona Airport, take flight SK455 to Stockholm. ' \
-                         'Gate 45B, seat 3A. Baggage drop at ticket counter 344.'
+        expected_text1 = 'From Girona Airport, take flight SK455 to ' \
+                         'Stockholm. ' \
+                         'Gate 45B, seat 3A. ' \
+                         'Baggage drop at ticket counter 344.'
 
         self.assertEqual(boarding_card1.description, expected_text1)
 
@@ -83,8 +86,10 @@ class AirplaneBoardingCardTest(TestCase):
             'automatic_baggage_transfer': True
         }
         boarding_card2 = boarding_card_factory(data2)
-        expected_text2 = 'From Stockholm, take flight SK22 to New York JFK. Gate 22, seat 7B. ' \
-                         'Baggage will we automatically transferred from your last leg.'
+        expected_text2 = 'From Stockholm, take flight SK22 to New York JFK. ' \
+                         'Gate 22, seat 7B. ' \
+                         'Baggage will we automatically transferred ' \
+                         'from your last leg.'
 
         self.assertEqual(boarding_card2.description, expected_text2)
 
@@ -116,7 +121,8 @@ class AirportBusBoardingCardTest(TestCase):
             'seat': None
         }
         boarding_card = boarding_card_factory(data)
-        expected_text = 'Take the airport bus from Barcelona to Girona Airport. No seat assignment.'
+        expected_text = 'Take the airport bus from Barcelona to ' \
+                        'Girona Airport. No seat assignment.'
         self.assertEqual(boarding_card.description, expected_text)
 
 
@@ -154,5 +160,6 @@ class TrainBoardingCardTest(TestCase):
             'number': '78A'
         }
         boarding_card = boarding_card_factory(data)
-        expected_text = 'Take train 78A from Madrid to Barcelona. Sit in seat 45B.'
+        expected_text = 'Take train 78A from Madrid to Barcelona. ' \
+                        'Sit in seat 45B.'
         self.assertEqual(boarding_card.description, expected_text)
